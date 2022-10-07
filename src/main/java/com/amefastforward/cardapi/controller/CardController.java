@@ -29,15 +29,7 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    //GET localhost::8080/card/health
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/health", produces = "application/json")
-    public String health() {
-        LOG.info("avaliando saúde da aplicação");
-        return "{\"status\": \"OK\"}";
-    }
-
-    //GET localhost::8080/card/{id}
+    //GET localhost:8080/card/{id}
     @GetMapping("{id}")
     public Card findCardById(@PathVariable("id") int id) {
         LOG.info("Iniciando busca pelo card com id [{}]", id);
@@ -50,7 +42,7 @@ public class CardController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Card não encontrado");
     }
 
-    //POST localhost::8080/card/
+    //POST localhost:8080/card/
     @PostMapping
     public Card createCard(@RequestBody CreateCardRequest createCardRequest) {
         LOG.info("Iniciando criação de Card com nome [{}]", createCardRequest.getName());
