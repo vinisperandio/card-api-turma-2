@@ -4,6 +4,7 @@ import com.amefastforward.cardapi.controller.request.CreateCardRequest;
 import com.amefastforward.cardapi.controller.request.UpdateCardRequest;
 import com.amefastforward.cardapi.model.Card;
 import com.amefastforward.cardapi.service.CardService;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class CardController {
 
     //GET localhost:8080/card/{id}
     @GetMapping("{id}")
+    @ApiOperation("Método responsavel por recuperar o Card pelo Id")
     public Card findCardById(@PathVariable("id") int id) {
         LOG.info("Iniciando busca pelo card com id [{}]", id);
         return cardService.findById(id);
