@@ -1,9 +1,19 @@
 package com.amefastforward.cardapi.model;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
+@Entity
 public class Card {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
     private String description;
     private int strength;
@@ -12,14 +22,17 @@ public class Card {
     private int gear;
     private int intellect;
     private String imageUrl;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "origin_id")
+    private CardOrigin origin;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -86,6 +99,10 @@ public class Card {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public CardOrigin getOrigin() { return origin; }
+
+    public void setOrigin(CardOrigin origin) { this.origin = origin; }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
